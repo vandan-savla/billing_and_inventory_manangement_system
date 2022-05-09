@@ -346,32 +346,38 @@ public class UpdateProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if ( jTextField1.getText().equals("")) {
+        if (jTextField1.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Select a Product!");
         } else {
 //        int pId = Integer.parseInt(jTextField1.getText());
 //            System.out.println(pId);
-        String pname = jTextField2.getText();
-        float rate = Float.parseFloat(jTextField3.getText());
-        String describe = jTextField4.getText();
-        int activate = Integer.parseInt(jTextField5.getText());
-        float quantity = Float.parseFloat(jTextField6.getText());
-        String category=String.valueOf(jComboBox1.getSelectedItem());
-        if(quantity==0){
-            activate=0;
-        }
-        try {
-            
-            Connection con = BillingManagementSystem.getConnection();
-            Statement st = con.createStatement();
-            st.executeUpdate("update products set P_Name = '" + pname + "' , Rate = '" + rate + "', Description ='" + describe + "',Activate = '" + activate + "',Quantity ='" + quantity + "',Category='"+category+"' where P_Name = '" + pname + "'");
-            JOptionPane.showMessageDialog(null, "Successfully Updated!!!");
-            setVisible(false);
-            new UpdateProduct().setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        
+            int pId = 0;
+            String pname = jTextField2.getText();
+            float rate = Float.parseFloat(jTextField3.getText());
+            String describe = jTextField4.getText();
+            int activate = Integer.parseInt(jTextField5.getText());
+            float quantity = Float.parseFloat(jTextField6.getText());
+            String category = String.valueOf(jComboBox1.getSelectedItem());
+            if (quantity == 0) {
+                activate = 0;
+            }
+            try {
+
+                Connection con = BillingManagementSystem.getConnection();
+                Statement st = con.createStatement();
+                Statement st2 = con.createStatement();
+                ResultSet rs = st2.executeQuery("select Product_Id from products where P_Name ='" + pname + "'");
+                while(rs.next()){
+                    pId = rs.getInt(1);
+                }
+                st.executeUpdate("update products set P_Name = '" + pname + "' , Rate = '" + rate + "', Description ='" + describe + "',Activate = '" + activate + "',Quantity ='" + quantity + "',Category='" + category + "' where Product_Id = '" + pId + "'");
+                JOptionPane.showMessageDialog(null, "Successfully Updated!!!");
+                setVisible(false);
+                new UpdateProduct().setVisible(true);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -380,7 +386,7 @@ public class UpdateProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if ( jTextField1.getText().equals("")) {
+        if (jTextField1.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Select a Product!");
         } else {
             int response = JOptionPane.showConfirmDialog(this, "Are You Sure You want To Delete?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
