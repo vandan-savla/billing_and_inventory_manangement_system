@@ -349,7 +349,8 @@ public class UpdateProduct extends javax.swing.JFrame {
         if ( jTextField1.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Select a Product!");
         } else {
-        int pId = Integer.parseInt(jTextField1.getText());
+//        int pId = Integer.parseInt(jTextField1.getText());
+//            System.out.println(pId);
         String pname = jTextField2.getText();
         float rate = Float.parseFloat(jTextField3.getText());
         String describe = jTextField4.getText();
@@ -363,7 +364,7 @@ public class UpdateProduct extends javax.swing.JFrame {
             
             Connection con = BillingManagementSystem.getConnection();
             Statement st = con.createStatement();
-            st.executeUpdate("update products set P_Name = '" + pname + "' , Rate = '" + rate + "', Description ='" + describe + "',Activate = '" + activate + "',Quantity ='" + quantity + "',Category='"+category+"' where Product_id = '" + pId + "'");
+            st.executeUpdate("update products set P_Name = '" + pname + "' , Rate = '" + rate + "', Description ='" + describe + "',Activate = '" + activate + "',Quantity ='" + quantity + "',Category='"+category+"' where P_Name = '" + pname + "'");
             JOptionPane.showMessageDialog(null, "Successfully Updated!!!");
             setVisible(false);
             new UpdateProduct().setVisible(true);
