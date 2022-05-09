@@ -443,7 +443,12 @@ public class Billing extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-
+        
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        
+        
         jTextField4.setText(String.valueOf(total));
         jTextField5.setText(String.valueOf(totalq));
         jTextField12.setText(String.valueOf(0.0));
@@ -575,6 +580,8 @@ public class Billing extends javax.swing.JFrame {
                 pid = Integer.parseInt(table1.getValueAt(row, 0).toString());
                 q = (Float.parseFloat(table1.getValueAt(row, 3).toString()));
                 t = Float.parseFloat(table1.getValueAt(row, 5).toString());
+                
+                
                 total = total - t;
                 jTextField4.setText(String.valueOf(total));
 
