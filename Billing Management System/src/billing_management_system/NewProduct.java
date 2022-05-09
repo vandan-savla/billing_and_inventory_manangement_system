@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package billing_management_system;
+
 import java.sql.*;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import billing_management_system.BillingManagementSystem;
+
 /**
  *
  * @author Himali
@@ -19,13 +21,14 @@ public class NewProduct extends javax.swing.JFrame {
     public NewProduct() {
         initComponents();
     }
-int pId;
-String pname;
-float rate;
-String describe;
-int activate;
-String category;
-float quantity;
+    int pId;
+    String pname;
+    float rate;
+    String describe;
+    int activate;
+    String category;
+    float quantity;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -315,145 +318,146 @@ float quantity;
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        try{
+        try {
             Connection con = BillingManagementSystem.getConnection();
             Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet rs = st.executeQuery("select max(Product_id) from products");
-            if(rs.first())
-            {
+            if (rs.first()) {
                 int id = rs.getInt(1);
-                id=id+1;
-                String str=String.valueOf(id);
+                id = id + 1;
+                String str = String.valueOf(id);
                 jLabel4.setText(str);
-            }
-            else
+            } else {
                 jLabel4.setText("1");
-        }catch(Exception e)
-        {
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-        }    
+        }
     }//GEN-LAST:event_formComponentShown
 
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
-        if(jTextField1.getText().equals("Enter Product Name"))
-        {
+        if (jTextField1.getText().equals("Enter Product Name")) {
             jTextField1.setText("");
-            jTextField1.setForeground(new Color(0,0,0));
+            jTextField1.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_jTextField1FocusGained
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-        if(jTextField1.getText().equals(""))
-        {
+        if (jTextField1.getText().equals("")) {
             jTextField1.setText("Enter Product Name");
-            jTextField1.setForeground(new Color(153,153,153));
+            jTextField1.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
-        if(jTextField2.getText().equals("Enter Rate"))
-        {
+        if (jTextField2.getText().equals("Enter Rate")) {
             jTextField2.setText("");
-            jTextField2.setForeground(new Color(0,0,0));
+            jTextField2.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_jTextField2FocusGained
 
     private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
-        if(jTextField2.getText().equals(""))
-        {
+        if (jTextField2.getText().equals("")) {
             jTextField2.setText("Enter Rate");
-            jTextField2.setForeground(new Color(153,153,153));
+            jTextField2.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_jTextField2FocusLost
 
     private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
-        if(jTextField3.getText().equals("Enter Description"))
-        {
+        if (jTextField3.getText().equals("Enter Description")) {
             jTextField3.setText("");
-            jTextField3.setForeground(new Color(0,0,0));
+            jTextField3.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_jTextField3FocusGained
 
     private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
-        if(jTextField3.getText().equals(""))
-        {
+        if (jTextField3.getText().equals("")) {
             jTextField3.setText("Enter Description");
-            jTextField3.setForeground(new Color(153,153,153));
+            jTextField3.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_jTextField3FocusLost
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      
+
         setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
-        if(jTextField4.getText().equals("Enter Quantity"))
-        {
+        if (jTextField4.getText().equals("Enter Quantity")) {
             jTextField4.setText("");
-            jTextField4.setForeground(new Color(0,0,0));
+            jTextField4.setForeground(new Color(0, 0, 0));
         }
     }//GEN-LAST:event_jTextField4FocusGained
 
     private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
-        if(jTextField4.getText().equals(""))
-        {
+        if (jTextField4.getText().equals("")) {
             jTextField4.setText("Enter Quantity");
-            jTextField4.setForeground(new Color(153,153,153));
+            jTextField4.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_jTextField4FocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        pId = Integer.parseInt(jLabel4.getText());
-        pname = jTextField1.getText();
-        rate = Float.parseFloat(jTextField2.getText());
-        describe = jTextField3.getText();
-        if(jComboBox1.getSelectedItem()=="YES")
-            activate= 1;
-        else 
-            activate=0;
-        category = (String)jComboBox2.getSelectedItem();
-        quantity = Float.parseFloat(jTextField4.getText());
-        try{
-            Connection con = BillingManagementSystem.getConnection();
-            //Statement st = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            String sql="insert into products values('"+pId+"','"+pname+"','"+rate+"','"+describe+"','"+activate+"','"+category+"','"+quantity+"')";
+        if (jTextField1.getText().equals("")|| jTextField2.getText().equals("") || jTextField3.getText().equals("") || jTextField4.getText().equals("")) {
+            JOptionPane.showMessageDialog(null,"Fill all details!!");
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+            jTextField4.setText("");
             
-            Statement stm = con.createStatement();
-            stm.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null,"Successfully added");
-            setVisible(false);
-            new NewProduct().setVisible(true);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
+            
+
+        } else {
+            pId = Integer.parseInt(jLabel4.getText());
+            pname = jTextField1.getText();
+            rate = Float.parseFloat(jTextField2.getText());
+            describe = jTextField3.getText();
+            if (jComboBox1.getSelectedItem() == "YES") {
+                activate = 1;
+            } else {
+                activate = 0;
+            }
+            category = (String) jComboBox2.getSelectedItem();
+            quantity = Float.parseFloat(jTextField4.getText());
+            try {
+                Connection con = BillingManagementSystem.getConnection();
+                //Statement st = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+                String sql = "insert into products values('" + pId + "','" + pname + "','" + rate + "','" + describe + "','" + activate + "','" + category + "','" + quantity + "')";
+
+                Statement stm = con.createStatement();
+                stm.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "Successfully added");
+                setVisible(false);
+                new NewProduct().setVisible(true);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
         }
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      jTextField1.setText("Enter Product Name");
-      jTextField1.setForeground(new Color(153,153,153));
-      jTextField2.setText("Enter Rate");
-      jTextField2.setForeground(new Color(153,153,153));
-      jTextField3.setText("Enter Description");
-      jTextField3.setForeground(new Color(153,153,153));
-      jTextField4.setText("Enter Quantity");
-      jTextField4.setForeground(new Color(153,153,153));
-      jComboBox1.setSelectedItem("YES");
-      jComboBox2.setSelectedItem("Item 1");
+        jTextField1.setText("Enter Product Name");
+        jTextField1.setForeground(new Color(153, 153, 153));
+        jTextField2.setText("Enter Rate");
+        jTextField2.setForeground(new Color(153, 153, 153));
+        jTextField3.setText("Enter Description");
+        jTextField3.setForeground(new Color(153, 153, 153));
+        jTextField4.setText("Enter Quantity");
+        jTextField4.setForeground(new Color(153, 153, 153));
+        jComboBox1.setSelectedItem("YES");
+        jComboBox2.setSelectedItem("Item 1");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
-     * 
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-               java.awt.EventQueue.invokeLater(new Runnable() {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewProduct().setVisible(true);
             }
