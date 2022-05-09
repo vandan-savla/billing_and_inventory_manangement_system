@@ -225,57 +225,112 @@ public class Sales_report extends javax.swing.JFrame {
         int pId;
         String pname;
         float rate;
-        float tot_q,tot_p;
-       
+        float tot_q, tot_p;
+
         float quantity;
-        try {
-            Connection conn = BillingManagementSystem.getConnection();
+        if (selected_id == 0) {
+//            float tot_q, tot_p;
 
-            String sql = "Select pid as Product_Id ,pname as Product_Name ,sum(quantity) as Total_Quantity,sum(price) as Total_Price from sales where month(date)='" + selected_id + "' group by(pid)";
-            String sql2="select sum(quantity),sum(price) from sales where month(date)='" + selected_id + "'";
-            
-            PreparedStatement ps = conn.prepareStatement(sql);
-            PreparedStatement ps1 = conn.prepareStatement(sql2);
-            
-            ResultSet rs = ps.executeQuery();
-            ResultSet rs1 = ps1.executeQuery();
-            
-            ResultSetMetaData rsmd = rs.getMetaData();
-            ResultSetMetaData rsmd1 = rs1.getMetaData();
-            
-            DefaultTableModel model = (DefaultTableModel) Sales_report.jTable1.getModel();
-            model.setRowCount(0);
-            int cols = rsmd.getColumnCount();
-            String[] colName = new String[cols];
+            try {
+                Connection conn = BillingManagementSystem.getConnection();
 
-            for (int i = 0; i < cols; i++) {
-                colName[i] = rsmd.getColumnName(i + 1);
+                String sql = "Select pid as Product_Id ,pname as Product_Name ,sum(quantity) as Total_Quantity,sum(price) as Total_Price from sales group by(pid)";
+                String sql2 = "select sum(quantity),sum(price) from sales";
+
+                PreparedStatement ps = conn.prepareStatement(sql);
+                PreparedStatement ps1 = conn.prepareStatement(sql2);
+
+                ResultSet rs = ps.executeQuery();
+                ResultSet rs1 = ps1.executeQuery();
+
+                ResultSetMetaData rsmd = rs.getMetaData();
+                ResultSetMetaData rsmd1 = rs1.getMetaData();
+
+                DefaultTableModel model = (DefaultTableModel) Sales_report.jTable1.getModel();
+                model.setRowCount(0);
+
+                int cols = rsmd.getColumnCount();
+                String[] colName = new String[cols];
+
+                for (int i = 0; i < cols; i++) {
+                    colName[i] = rsmd.getColumnName(i + 1);
+                }
+                model.setColumnIdentifiers(colName);
+                while (rs.next()) {
+                    pId = rs.getInt(1);
+                    pname = rs.getString(2);
+                    rate = rs.getFloat(4);
+
+                    quantity = rs.getFloat(3);
+                    String[] row = {Integer.toString(pId), pname, Float.toString(quantity), Float.toString(rate)};
+
+                    model.addRow(row);
+                }
+                while (rs1.next()) {
+
+                    tot_q = rs1.getFloat(1);
+                    tot_p = rs1.getFloat(2);
+
+                    quantity_lbl.setText(String.valueOf(tot_q));
+                    price_lbl.setText(String.valueOf(tot_p));
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            model.setColumnIdentifiers(colName);
-            while (rs.next()) {
-                pId = rs.getInt(1);
-                pname = rs.getString(2);
-                rate = rs.getFloat(4);
-                rate = (float)(Math.round(rate * 100.0) / 100.0);   
-                
-                quantity = rs.getFloat(3);
-                String[] row = {Integer.toString(pId), pname, Float.toString(quantity), Float.toString(rate)};
 
-                model.addRow(row);
-            }
-            
-            while (rs1.next()) {
-                
-                tot_q = rs1.getFloat(1);
-                tot_p = rs1.getFloat(2);
-                
-                quantity_lbl.setText(String.valueOf(tot_q));
-                price_lbl.setText(String.valueOf(tot_p));
-                
+        } else {
+            try {
+                Connection conn = BillingManagementSystem.getConnection();
+
+                String sql = "Select pid as Product_Id ,pname as Product_Name ,sum(quantity) as Total_Quantity,sum(price) as Total_Price from sales where month(date)='" + selected_id + "' group by(pid)";
+                String sql2 = "select sum(quantity),sum(price) from sales where month(date)='" + selected_id + "'";
+
+                PreparedStatement ps = conn.prepareStatement(sql);
+                PreparedStatement ps1 = conn.prepareStatement(sql2);
+
+                ResultSet rs = ps.executeQuery();
+                ResultSet rs1 = ps1.executeQuery();
+
+                ResultSetMetaData rsmd = rs.getMetaData();
+                ResultSetMetaData rsmd1 = rs1.getMetaData();
+
+                DefaultTableModel model = (DefaultTableModel) Sales_report.jTable1.getModel();
+                model.setRowCount(0);
+                int cols = rsmd.getColumnCount();
+                String[] colName = new String[cols];
+
+                for (int i = 0; i < cols; i++) {
+                    colName[i] = rsmd.getColumnName(i + 1);
+                }
+                model.setColumnIdentifiers(colName);
+                while (rs.next()) {
+                    pId = rs.getInt(1);
+                    pname = rs.getString(2);
+                    rate = rs.getFloat(4);
+                    rate = (float) (Math.round(rate * 100.0) / 100.0);
+
+                    quantity = rs.getFloat(3);
+                    String[] row = {Integer.toString(pId), pname, Float.toString(quantity), Float.toString(rate)};
+
+                    model.addRow(row);
+                }
+
+                while (rs1.next()) {
+
+                    tot_q = rs1.getFloat(1);
+                    tot_p = rs1.getFloat(2);
+
+                    quantity_lbl.setText(String.valueOf(tot_q));
+                    price_lbl.setText(String.valueOf(tot_p));
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
