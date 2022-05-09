@@ -401,14 +401,19 @@ public class NewProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4FocusLost
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jTextField1.getText().equals("")|| jTextField2.getText().equals("") || jTextField3.getText().equals("") || jTextField4.getText().equals("")) {
+        if (jTextField1.getText().equals("Enter Product Name")|| jTextField2.getText().equals("Enter Rate") || jTextField3.getText().equals("Enter Description") || jTextField4.getText().equals("Enter Quantity")) {
             JOptionPane.showMessageDialog(null,"Fill all details!!");
-            jTextField1.setText("");
-            jTextField2.setText("");
-            jTextField3.setText("");
-            jTextField4.setText("");
+            jTextField1.setText("Enter Product Name");
+            jTextField1.setForeground(new Color(153, 153, 153));
             
+            jTextField2.setText("Enter Rate");
+            jTextField2.setForeground(new Color(153, 153, 153));
             
+            jTextField3.setText("Enter Description");
+            jTextField3.setForeground(new Color(153, 153, 153));
+            
+            jTextField4.setText("Enter Quantity");
+            jTextField4.setForeground(new Color(153, 153, 153));
 
         } else {
             pId = Integer.parseInt(jLabel4.getText());
